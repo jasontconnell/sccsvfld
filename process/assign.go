@@ -8,7 +8,7 @@ import (
 	"github.com/jasontconnell/sitecore/data"
 )
 
-func AssignTags(m data.ItemMap, srcFieldId, destFieldId uuid.UUID, lang data.Language) ([]data.UpdateField, error) {
+func AssignTags(m data.ItemMap, srcFieldId, destFieldId uuid.UUID, lang data.Language, tbl data.FieldSource) ([]data.UpdateField, error) {
 	updflds := []data.UpdateField{}
 	for _, item := range m {
 		fv := item.GetFieldValue(srcFieldId, lang)
@@ -39,7 +39,7 @@ func AssignTags(m data.ItemMap, srcFieldId, destFieldId uuid.UUID, lang data.Lan
 			uptype = data.Update
 		}
 
-		upd := data.UpdateField{ItemID: item.GetId(), FieldID: destFieldId, Value: csvstr, Source: data.VersionedFields, Version: fv.GetVersion(), Language: lang, UpdateType: uptype}
+		upd := data.UpdateField{ItemID: item.GetId(), FieldID: destFieldId, Value: csvstr, Source: tbl, Version: fv.GetVersion(), Language: lang, UpdateType: uptype}
 		updflds = append(updflds, upd)
 	}
 

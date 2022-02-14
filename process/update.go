@@ -7,7 +7,7 @@ import (
 	"github.com/jasontconnell/sitecore/data"
 )
 
-func Update(connstr string, flds []data.UpdateField, tbl data.FieldSource) error {
+func Update(connstr string, flds []data.UpdateField) error {
 	c, err := api.Update(connstr, nil, flds)
 
 	log.Println("updated", c, "items")

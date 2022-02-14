@@ -32,13 +32,15 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Println("read", len(items), "items.", time.Since(start))
 
-	updFields, err := process.AssignTags(items, srcId, destId, data.English)
+	updFields, err := process.AssignTags(items, srcId, destId, data.English, data.FieldSource(cfg.DestTable))
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Println("updating", len(updFields), "fields.", time.Since(start))
 
-	err = process.Update(cfg.ConnectionString, updFields, data.FieldSource(cfg.DestTable))
+	err = process.Update(cfg.ConnectionString, updFields)
 	if err != nil {
 		log.Fatal(err)
 	}
