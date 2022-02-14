@@ -3,14 +3,16 @@ package main
 import (
 	"flag"
 	"log"
+	"time"
 
 	"github.com/google/uuid"
-	"github.com/jasontconnell/lpgatags/conf"
-	"github.com/jasontconnell/lpgatags/process"
+	"github.com/jasontconnell/sccsvfld/conf"
+	"github.com/jasontconnell/sccsvfld/process"
 	"github.com/jasontconnell/sitecore/data"
 )
 
 func main() {
+	start := time.Now()
 	fn := flag.String("c", "config.json", "config filename")
 	flag.Parse()
 
@@ -40,4 +42,5 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Println("finished. ", time.Since(start))
 }
